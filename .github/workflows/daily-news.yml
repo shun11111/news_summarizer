@@ -1,0 +1,31 @@
+name: Daily AI News
+
+on:
+  schedule:
+    # 毎日16:30（JST）= 7:30（UTC）に実行
+    - cron: '30 7 * * *'
+  workflow_dispatch:  # 手動実行も可能
+
+jobs:
+  send-news:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests openai line-bot-sdk
+    
+    - name: Run AI News Bot
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        LINE_ACCESS_TOKEN: ${{ secrets.LINE_ACCESS_TOKEN }}
+      run: |
+        python main.py

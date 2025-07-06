@@ -1,0 +1,3 @@
+requests==2.31.0
+openai==1.93.0
+line-bot-sdk==3.5.0
