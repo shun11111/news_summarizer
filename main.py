@@ -26,6 +26,9 @@ class AINewsBot:
         if not self.openai_api_key or not self.line_access_token:
             raise ValueError("GitHub SecretsでAPIキーを設定してください")
         
+        print("OPENAI_API_KEY:", "あり" if self.openai_api_key else "なし")
+        print("LINE_ACCESS_TOKEN:", "あり" if self.line_access_token else "なし")
+        
         # クライアント初期化
         self.openai_client = OpenAI(api_key=self.openai_api_key)
         self.line_bot_api = LineBotApi(self.line_access_token)
